@@ -1,5 +1,3 @@
-import static com.github.glassmc.kiln.standard.DependencyHandlerExtension.*;
-
 buildscript {
     repositories {
         mavenCentral()
@@ -28,11 +26,10 @@ repositories {
 
 dependencies {
     implementation 'com.github.glassmc:loader:v0.8.1'
+    implementation 'com.github.glassmc:kiln:v0.6.12'
 
-    implementation minecraft('client', '1.7.10', 'yarn')
-    implementation minecraft('client', '1.8.9', 'mcp')
-    implementation minecraft('client', '1.17.1', 'yarn')
-    implementation minecraft('client', '1.18.1', 'mojang')
-
+    implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.ow2.asm:asm-tree:9.2'
+    implementation 'org.ow2.asm:asm-commons:9.2'
+    implementation 'com.github.jezza:toml:1.2-java-8'
 }
