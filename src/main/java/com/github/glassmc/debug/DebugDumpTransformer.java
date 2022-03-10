@@ -21,14 +21,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebugTransformer implements Listener, Transformer {
+public class DebugDumpTransformer implements Listener, Transformer {
 
     private final File DUMP_FOLDER = new File("dump");
 
     private final List<IMappingsProvider> mappingsProviders = new ArrayList<>();
     private final List<String> dumpedClasses = new ArrayList<>();
 
-    public DebugTransformer() {
+    public DebugDumpTransformer() {
         if (this.DUMP_FOLDER.exists()) {
             try {
                 FileUtils.deleteDirectory(this.DUMP_FOLDER);
@@ -96,7 +96,7 @@ public class DebugTransformer implements Listener, Transformer {
 
     @Override
     public void run() {
-        GlassLoader.getInstance().registerTransformer(DebugTransformer.class, TransformerOrder.LAST);
+        GlassLoader.getInstance().registerTransformer(DebugDumpTransformer.class, TransformerOrder.LAST);
     }
 
     @Override

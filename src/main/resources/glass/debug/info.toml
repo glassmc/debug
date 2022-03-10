@@ -3,4 +3,11 @@ version = "0.1.0"
 namespace = "com.github.glassmc.debug"
 
 [listeners]
-initialize = "DebugTransformer"
+initialize = [
+    "DebugDumpTransformer",
+    "DebugStandardTransformer"
+]
+
+[environment]
+    [environment.has]
+    all = "*"

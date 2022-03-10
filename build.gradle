@@ -1,14 +1,19 @@
+import com.github.glassmc.kiln.standard.environment.GlassLoaderEnvironment
+
 buildscript {
     repositories {
         mavenCentral()
 
+        maven {
+            url = 'https://glassmc.ml/repository/'
+        }
         maven {
             url = 'https://jitpack.io/'
         }
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:v0.6.9'
+        classpath 'com.github.glassmc:kiln:0.7.2'
     }
 }
 
@@ -20,16 +25,24 @@ repositories {
     mavenCentral()
 
     maven {
+        url = 'https://glassmc.ml/repository/'
+    }
+    maven {
         url = 'https://jitpack.io/'
     }
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:v0.8.1'
-    implementation 'com.github.glassmc:kiln:v0.6.12'
+    implementation 'com.github.glassmc:loader:0.9.2:mapped'
+
+    shadowImplementation 'com.github.glassmc:kiln:v0.6.12'
 
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.ow2.asm:asm-tree:9.2'
     implementation 'org.ow2.asm:asm-commons:9.2'
     implementation 'com.github.jezza:toml:1.2-java-8'
+}
+
+kiln {
+    environment = new GlassLoaderEnvironment("0.9.1")
 }
