@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:0.7.2'
+        classpath 'com.github.glassmc:kiln:0.7.4'
     }
 }
 
@@ -35,7 +35,7 @@ repositories {
 dependencies {
     implementation 'com.github.glassmc:loader:0.9.3:mapped'
 
-    shadowImplementation 'com.github.glassmc:kiln:v0.6.12'
+    shadowImplementation 'com.github.glassmc:kiln:0.7.4'
 
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.ow2.asm:asm-tree:9.2'

@@ -1,5 +1,7 @@
 package com.github.glassmc.debug;
 
+import com.github.glassmc.kiln.standard.internalremapper.ClassRemapper;
+import com.github.glassmc.kiln.standard.internalremapper.Remapper;
 import com.github.glassmc.kiln.standard.mappings.*;
 import com.github.glassmc.loader.api.GlassLoader;
 import com.github.glassmc.loader.api.Listener;
@@ -8,12 +10,9 @@ import com.github.glassmc.loader.api.loader.TransformerOrder;
 import com.github.jezza.Toml;
 import com.github.jezza.TomlArray;
 import com.github.jezza.TomlTable;
-import org.apache.commons.io.IOUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.commons.ClassRemapper;
-import org.objectweb.asm.commons.Remapper;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;

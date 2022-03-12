@@ -1,5 +1,7 @@
 package com.github.glassmc.debug;
 
+import com.github.glassmc.kiln.standard.internalremapper.ClassRemapper;
+import com.github.glassmc.kiln.standard.internalremapper.Remapper;
 import com.github.glassmc.kiln.standard.mappings.*;
 import com.github.glassmc.loader.api.GlassLoader;
 import com.github.glassmc.loader.api.Listener;
@@ -12,8 +14,6 @@ import org.apache.commons.io.FileUtils;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.commons.ClassRemapper;
-import org.objectweb.asm.commons.Remapper;
 
 import java.io.File;
 import java.io.FileReader;
