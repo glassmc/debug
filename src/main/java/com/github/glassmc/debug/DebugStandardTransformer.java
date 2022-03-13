@@ -7,6 +7,7 @@ import com.github.glassmc.loader.api.GlassLoader;
 import com.github.glassmc.loader.api.Listener;
 import com.github.glassmc.loader.api.loader.Transformer;
 import com.github.glassmc.loader.api.loader.TransformerOrder;
+import com.github.glassmc.loader.impl.GlassLoaderImpl;
 import com.github.jezza.Toml;
 import com.github.jezza.TomlArray;
 import com.github.jezza.TomlTable;
@@ -78,6 +79,15 @@ public class DebugStandardTransformer implements Listener, Transformer {
             }
         }
 
+        String environment;
+        if (GlassLoader.getInstance().getShardVersion("client") != null) {
+            environment = "client";
+        } else {
+            environment = "server";
+        }
+
+        mappingsProviders.removeIf(provider -> !GlassLoader.getInstance().getShardVersion(environment).equals(provider.getVersion()));
+
         this.namedRemappers = mappingsProviders.stream().map(provider -> provider.getRemapper(IMappingsProvider.Direction.TO_NAMED)).collect(Collectors.toList());
         this.obfuscatedRemappers = mappingsProviders.stream().map(provider -> provider.getRemapper(IMappingsProvider.Direction.TO_OBFUSCATED)).collect(Collectors.toList());
     }
@@ -89,7 +99,7 @@ public class DebugStandardTransformer implements Listener, Transformer {
 
     @Override
     public boolean canTransform(String name) {
-        return !(name.startsWith("org/objectweb/asm/"));
+        return !(name.startsWith("org/objectweb/asm/") || name.startsWith("com/github/glassmc/kiln/standard/internalremapper/"));
     }
 
     @Override

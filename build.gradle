@@ -13,7 +13,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.github.glassmc:kiln:0.7.4'
+        classpath 'com.github.glassmc:kiln:0.7.6'
     }
 }
 
@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.glassmc:loader:0.9.3:mapped'
+    implementation 'com.github.glassmc:loader:0.9.5:mapped'
 
     shadowImplementation 'com.github.glassmc:kiln:0.7.4'
 
@@ -44,5 +44,5 @@ dependencies {
 }
 
 kiln {
-    environment = new GlassLoaderEnvironment("0.9.3")
+    environment = new GlassLoaderEnvironment("0.9.5")
 }
