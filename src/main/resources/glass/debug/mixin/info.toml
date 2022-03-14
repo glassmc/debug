@@ -1,0 +1,8 @@
+namespace = "com.github.glassmc.debug.mixin"
+
+[listeners]
+debug-initialize = "DebugMixinInitializeListener"
+
+[environment]
+    [environment.has]
+    mixin = "*"

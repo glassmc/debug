@@ -4,10 +4,8 @@ import com.github.glassmc.kiln.standard.internalremapper.ClassRemapper;
 import com.github.glassmc.kiln.standard.internalremapper.Remapper;
 import com.github.glassmc.kiln.standard.mappings.*;
 import com.github.glassmc.loader.api.GlassLoader;
-import com.github.glassmc.loader.api.Listener;
 import com.github.glassmc.loader.api.loader.Transformer;
 import com.github.glassmc.loader.api.loader.TransformerOrder;
-import com.github.glassmc.loader.impl.GlassLoaderImpl;
 import com.github.jezza.Toml;
 import com.github.jezza.TomlArray;
 import com.github.jezza.TomlTable;
@@ -24,9 +22,10 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class DebugStandardTransformer implements Listener, Transformer {
+public class DebugStandardTransformer implements Transformer {
 
     private boolean remap = false;
 
@@ -93,13 +92,8 @@ public class DebugStandardTransformer implements Listener, Transformer {
     }
 
     @Override
-    public void run() {
-        GlassLoader.getInstance().registerTransformer(DebugStandardTransformer.class, TransformerOrder.LAST);
-    }
-
-    @Override
     public boolean canTransform(String name) {
-        return !(name.startsWith("org/objectweb/asm/") || name.startsWith("com/github/glassmc/kiln/standard/internalremapper/"));
+        return !(name.startsWith("org/objectweb/asm/") || name.startsWith("com/github/glassmc/kiln/standard/internalremapper/") || name.startsWith("com/github/glassmc/debug/"));
     }
 
     @Override
@@ -120,10 +114,8 @@ public class DebugStandardTransformer implements Listener, Transformer {
         if (!newName.equals(name)) {
             try {
                 data = GlassLoader.getInstance().getClassBytes(newName);
-                //data = IOUtils.toByteArray(DebugStandardTransformer.class.getClassLoader().getResourceAsStream(name + ".class"));
             } catch (NullPointerException e) {
                 return data;
-                //e.printStackTrace();
             }
         } else {
             if (data.length == 0) {
@@ -147,6 +139,10 @@ public class DebugStandardTransformer implements Listener, Transformer {
 
             for (FieldNode fieldNode : classNode.fields) {
                 fieldNode.access = makePublic(fieldNode.access);
+            }
+
+            for (Consumer<ClassNode> remapper2 : GlassLoader.getInstance().getAPI(Debug.class).getRemappers()) {
+                remapper2.accept(classNode);
             }
 
             classNode.accept(classVisitor);

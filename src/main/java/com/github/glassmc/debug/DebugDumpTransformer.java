@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DebugDumpTransformer implements Listener, Transformer {
+public class DebugDumpTransformer implements Transformer {
 
     private final File DUMP_FOLDER = new File("dump");
 
@@ -92,11 +92,6 @@ public class DebugDumpTransformer implements Listener, Transformer {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    public void run() {
-        GlassLoader.getInstance().registerTransformer(DebugDumpTransformer.class, TransformerOrder.LAST);
     }
 
     @Override

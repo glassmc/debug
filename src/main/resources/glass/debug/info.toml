@@ -2,10 +2,13 @@ id = "debug"
 version = "0.1.0"
 namespace = "com.github.glassmc.debug"
 
+implementations = [
+    "mixin"
+]
+
 [listeners]
 initialize = [
-    "DebugDumpTransformer",
-    "DebugStandardTransformer"
+    "DebugInitializeListener",
 ]
 
 [environment]
