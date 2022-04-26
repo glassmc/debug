@@ -114,7 +114,7 @@ public class DebugStandardTransformer implements Transformer {
         if (!newName.equals(name)) {
             try {
                 data = GlassLoader.getInstance().getClassBytes(newName);
-            } catch (NullPointerException e) {
+            } catch (NullPointerException | ClassNotFoundException e) {
                 return data;
             }
         } else {
